@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$title}</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/public/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/public/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js"></script>
+    <link rel="stylesheet" href="/public/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/public/assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/public/assets/css/app.css">
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+
+</head>
+
+<body data-type="widgets">
+    <script src="/public/assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+{include file="index/header"}
+        <!-- 风格切换 -->
+        {include file="index/menu"}
+
+        <!-- 内容区域 -->
+        <div class="tpl-content-wrapper">
+
+
+            <div class="row-content am-cf">
+
+                <div class="row">
+
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">学生注册</div>
+                                <div class="widget-function am-fr">
+                                    <a href="javascript:;" class="am-icon-cog"></a>
+                                </div>
+                            </div>
+                            <div class="widget-body am-fr">
+
+                                <form class="am-form tpl-form-border-form" method="post" action="/index.php/index/student/register">
+                                    <input type="hidden" name="flag" value="1">
+
+                                    <div class="am-form-group">
+                                        <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">姓名 </label>
+                                        <div class="am-u-sm-12">
+                                            <input type="text" required name="name" class="tpl-form-input am-margin-top-xs" id="user-name" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">学号 </label>
+                                        <div class="am-u-sm-12">
+                                            <input type="text" required name="number" class="tpl-form-input am-margin-top-xs" id="user-name" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">学院 </label>
+                                        <div class="am-u-sm-12">
+                                            <input type="text" required name="college" class="tpl-form-input am-margin-top-xs" id="user-name" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">年级 </label>
+                                        <div class="am-u-sm-12">
+                                            <input type="text" required name="grade" class="tpl-form-input am-margin-top-xs" id="user-name" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="user-weibo" class="am-u-sm-12 am-form-label  am-text-left">人脸采集 <span class="tpl-form-line-small-title">Images</span></label>
+                                        <div class="am-u-sm-12 am-margin-top-xs">
+                                            <div class="am-form-group am-form-file">
+                                                <div class="tpl-form-file-img">
+                                                    <div style="">
+
+                                                        <div class="div-a" id="contentHolder" style="float: left;">
+                                                            <video id="video" width="40%" height="40%" autoplay></video>
+                                                            <canvas style="" hidden="hidden"  id="canvas" width="520" height="250"></canvas>
+                                                        </div>
+                                                        <div style="float: left; ">
+                                                            <img width="60%" height="60%" id="image1" alt="">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <button type="button" id="snap" class="am-btn am-btn-danger am-btn-sm ">
+                                                    <i class="am-icon-cloud-upload"></i> 采集图片</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="image_src" value="" id="image_src">
+
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-12 am-u-sm-push-12">
+                                            <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="http://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="/public/assets/js/amazeui.datatables.min.js"></script>
+    <script src="/public/assets/js/dataTables.responsive.min.js"></script>
+    <script src="/public/assets/js/app.js"></script>
+
+    <script src="/public/js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+
+        //判断浏览器是否支持HTML5 Canvas
+        window.onload = function () {
+            try {
+                //动态创建一个canvas元 ，并获取他2Dcontext。如果出现异常则表示不支持 document.createElement("canvas").getContext("2d");
+                // document.getElementById("support").innerHTML = "浏览器支持HTML5 CANVAS";
+            }
+            catch (e) {
+                // document.getElementByIdx("support").innerHTML = "浏览器不支持HTML5 CANVAS";
+            }
+        };
+
+        //这段代 主要是获取摄像头的视频流并显示在Video 签中
+        window.addEventListener("DOMContentLoaded", function () {
+            var canvas = document.getElementById("canvas"),
+                context = canvas.getContext("2d"),
+                video = document.getElementById("video"),
+                videoObj = { "video": true },
+                errBack = function (error) {
+                    console.log("Video capture error: ", error.code);
+                };
+            //拍照按钮
+            $("#snap").click(function () {
+                // document.getElementById('image1').src = '/public/uploads/20180525/0af2110980d6554a84a326b0b07ba4cb.png';
+                context.drawImage(video, 0, 0, 630, 300);
+                CatchCode();
+            })
+            //拍照每秒一次
+            setInterval(function(){
+                // context.drawImage(video, 0, 0, 330, 250)
+                // CatchCode();
+            },1000);
+            //navigator.getUserMedia这个写法在Opera中好像是navigator.getUserMedianow
+            //更新兼容火狐浏览器
+            if (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
+                navigator.getUserMedia=navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                navigator.getUserMedia(videoObj, function (stream) {
+                    video.srcObject  = stream;
+                    video.play();
+                }, errBack);
+            }
+
+        }, false);
+
+        function dataURItoBlob(base64Data) {
+            var byteString;
+            if (base64Data.split(',')[0].indexOf('base64') >= 0)
+                byteString = atob(base64Data.split(',')[1]);
+            else
+                byteString = unescape(base64Data.split(',')[1]);
+            var mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
+            var ia = new Uint8Array(byteString.length);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ia], {type:mimeString});
+        }
+
+        //上传服务器
+        function CatchCode() {
+            var canvans = document.getElementById("canvas");
+            //获取浏览器页面的画布对象
+            //以下开始编 数据
+            var imageBase64 = canvans.toDataURL();
+            var blob = dataURItoBlob(imageBase64);  // 上一步中的函数
+            var fd = new FormData(document.forms[0]);
+            fd.append("the_file", blob, 'image.png');
+            //将图像转换为base64数据
+//将图像转换为base64数据
+            $.ajax({
+                type:"POST",
+                url:"/index.php/index/index/image_ajax",
+                processData: false,     // 必须
+                contentType: false,     // 必须
+                data:fd,
+                datatype: "json",
+                success:function(data){
+                    var mes = (data);
+
+                        document.getElementById('image1').src = mes;
+                        document.getElementById('image_src').value = mes;
+
+                },
+                error: function(){
+                    //请求出错处理
+                    alert("出情况了");
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
