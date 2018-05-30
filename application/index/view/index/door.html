@@ -33,10 +33,10 @@
             CatchCode();
 			})
             //拍照每秒一次
-            // setInterval(function(){
-            //     context.drawImage(video, 0, 0, 630, 300)
-            //     CatchCode();
-            // },2000);
+             <!-- setInterval(function(){ -->
+                 <!-- context.drawImage(video, 0, 0, 630, 300) -->
+                 <!-- CatchCode(); -->
+             <!-- },2000); -->
             //navigator.getUserMedia这个写法在Opera中好像是navigator.getUserMedianow
             //更新兼容火狐浏览器
             if (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
@@ -63,6 +63,7 @@
             return new Blob([ia], {type:mimeString});
         }
 
+
         //上传服务器
         function CatchCode() {
             var canvans = document.getElementById("canvas");
@@ -84,26 +85,26 @@
                     var mes = (data);
                     if (mes.state=='1'){
                         document.getElementById('state').style.color = 'red';
-                        document.getElementById('state').innerHTML = '您的信息未被识别';
+                        document.getElementById('state').innerHTML = '未在数据库中找到您的人脸信息';
                         document.getElementById('image1').style.display = 'none';
                         document.getElementById('image2').style.display = 'none';
                     }else if (mes.state=='2'){
                         document.getElementById('state').style.color = 'green';
-                        document.getElementById('state').innerHTML = '验证通过';
+                        document.getElementById('state').innerHTML = '相似度'+mes.scoure+'% 人脸识别验证通过';
                         document.getElementById('image1').style.display = '';
                         document.getElementById('image2').style.display = '';
                         document.getElementById('image1').src = mes.image1;
                         document.getElementById('image2').src = mes.image2;
                     }else{
                         document.getElementById('state').style.color = 'red';
-                        document.getElementById('state').innerHTML = '没有识别到人脸';
+                        document.getElementById('state').innerHTML = '未识别到人脸';
                         document.getElementById('image1').style.display = 'none';
                         document.getElementById('image2').style.display = 'none';
                     }
                 },
                 error: function(){
                     //请求出错处理
-                    alert("出情况了");
+                    alert("出情况了，请找管理员");
                 }
             });
         }
